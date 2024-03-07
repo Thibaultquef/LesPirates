@@ -8,7 +8,7 @@ public class Plateau {
 		return nbCases;
 	}
 	
-	public Case getCase() {
+	public Case getCase(int numero) {
 		return null;
 	}
 	

@@ -4,7 +4,7 @@ public class Pirate {
 	private int pointDeVie = 5;
 	private String nom;
 	private Couleur couleur;
-	private Case caze;
+	private int position;
 	private Arme arme;
 	
 	public int getPV() {
@@ -23,7 +23,11 @@ public class Pirate {
 		return arme;
 	}
 	
-	public Case caze() {
-		return caze;
+	public int getPosition() {
+		return position;
+	}
+	
+	public void appliquerEffet(int position) {
+		
 	}
 }
