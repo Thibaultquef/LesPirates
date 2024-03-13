@@ -16,8 +16,16 @@ public class Jeu {
 		return (int) (random.nextInt(7));
 	}
 	
+	public void tourPirate(Pirate pirate) {
+		
+	}
+	
 	public void duel() {
 		
+	}
+	
+	public void gagantDuel() {
+
 	}
 	
 
