@@ -1,7 +1,9 @@
 package jeu;
+import java.util.Random;
 
 public class Jeu {
 	private int nbJoueurs = 2;
+	private Random random = new Random();
 	private Plateau plateau;
 	private Pirate[] listePirates;
 	 
@@ -11,15 +13,13 @@ public class Jeu {
 	}
 	
 	public int lanceDe() {
-		return 0;
+		return (int) (random.nextInt(7));
 	}
 	
-	public void deplacerPirate(Pirate pirate, int valeurDe) {
+	public void duel() {
 		
 	}
 	
-	public void appliquerEffetCase(Case caze) {
-		
-	}
+
 }
 

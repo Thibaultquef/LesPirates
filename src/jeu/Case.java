@@ -1,5 +1,7 @@
 package jeu;
 
+import Enum.Effet;
+
 public class Case {
 	private int numero;
 	private Effet effet;

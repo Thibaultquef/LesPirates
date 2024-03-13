@@ -1,4 +1,4 @@
-package jeu;
+package Enum;
 
 public enum Effet {
 	RHUM,ARME,NEUTRE,VICTOIRE

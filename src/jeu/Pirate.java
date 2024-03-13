@@ -1,5 +1,7 @@
 package jeu;
 
+import Enum.Couleur;
+
 public class Pirate {
 	private int pointDeVie = 5;
 	private String nom;
@@ -27,7 +29,25 @@ public class Pirate {
 		return position;
 	}
 	
-	public void appliquerEffet(int position) {
-		
+	public void setPV() {
+		this.pointDeVie = pointDeVie;
+	}
+	
+	public void setArme() {
+		this.arme = arme;
+	}
+	
+	public void deplacerPirate(int valeurDe) {
+		int positionActuelle = getPosition();
+		int nouvellePosition = positionActuelle + valeurDe;
+		this.position = nouvellePosition;
+	}
+	
+	public int calculerDegat(int difference) {
+		return difference;
+	}
+	
+	public int infligerDegat(int difference) {
+		return difference;
 	}
 }
