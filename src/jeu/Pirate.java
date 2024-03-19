@@ -1,5 +1,6 @@
 package jeu;
 
+import Enum.Arme;
 import Enum.Couleur;
 
 public class Pirate {
@@ -17,23 +18,33 @@ public class Pirate {
 		return nom;
 	}
 	
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	
 	public Couleur getCouleur() {
 		return couleur;
+	}
+	
+	public void setCouleur(Couleur couleur) {
+		this.couleur = couleur;
 	}
 	
 	public Arme getArme() {
 		return arme;
 	}
 	
+	
 	public int getPosition() {
 		return position;
 	}
 	
-	public void setPV() {
+	public void setPv() {
 		this.pointDeVie = pointDeVie;
 	}
 	
-	public void setArme() {
+	public void setArme(Arme arme) {
 		this.arme = arme;
 	}
 	
