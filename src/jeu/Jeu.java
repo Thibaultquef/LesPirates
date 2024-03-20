@@ -1,6 +1,7 @@
 package jeu;
 import java.util.Random;
 
+import CaseSpeciale.Case;
 import Enum.Arme;
 import Enum.Couleur;
 import Enum.Identite;
@@ -10,6 +11,7 @@ public class Jeu {
 	private Random random = new Random();
 	private Plateau plateau;
 	private Pirate[] listePirates;
+	private JournalDeBord journal;
 	 
 	public Pirate[] getListePirates(){
 		return listePirates;
@@ -24,7 +26,7 @@ public class Jeu {
 	}
 	
 	public Pirate[] remplissageListePirate(){
-		Random random = new Random();
+		
         Pirate[] listePirates = new Pirate[nbJoueurs];
         Couleur[] couleurs = Couleur.values();
         Identite[] identites = Identite.values();
@@ -47,19 +49,43 @@ public class Jeu {
 	}
 	
 	public int lanceDe() {
-		return (int) (random.nextInt(7));
+		return (random.nextInt(7));
 	}
 	
 	public void tourPirate(Pirate pirate) {
+		int resultatDe = lanceDe();
+		pirate.deplacerPirate(resultatDe);
+		Case caseActuelle = plateau.getCase(pirate.getPosition()-1);
+		caseActuelle.appliquerEffet(pirate, plateau, random, journal);
 		
 	}
 	
-	public void duel() {
-		
+	public void duel(Pirate pirate1, Pirate pirate2) {
+        int distance = Math.abs(pirate1.getPosition() - pirate2.getPosition());
+        if (distance <= 2) {
+            int puissanceArmePirate1 = pirate1.getArme();
+            int puissanceArmePirate2 = pirate2.getArme();
+            
+            if (puissanceArmePirate1 > puissanceArmePirate2) {
+                pirate2.setPv(pirate2.getPV() - 1);
+                System.out.println(pirate1.getNom() + "a une force de" + puissanceArmePirate1);
+                System.out.println(pirate2.getNom() + "a une force de" + puissanceArmePirate2);
+                System.out.println(pirate1.getNom() + "gagne", pirate2.getNom() + "perd 1 PV");
+            } else if (puissanceArmePirate1 < puissanceArmePirate2) {
+                pirate1.setPv(pirate1.getPV() - 1);
+                System.out.println(pirate1.getNom() + "a une force de" + puissanceArmePirate1);
+                System.out.println(pirate2.getNom() + "a une force de" + puissanceArmePirate2);
+                System.out.println("Le joueur 2 gagne, le joueur 1 perd 1 PV");
+            } else {
+                System.out.println(pirate1.getNom() + "a une force de" + puissanceArmePirate1);
+                System.out.println(pirate2.getNom() + "a une force de" + puissanceArmePirate2);
+                System.out.println("Aucun joueur ne gagne");
+            }
+        }
 	}
 	
 	public void gagantDuel() {
-
+		
 	}
 	
 

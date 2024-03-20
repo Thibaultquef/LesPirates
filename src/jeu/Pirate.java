@@ -40,7 +40,7 @@ public class Pirate {
 		return position;
 	}
 	
-	public void setPv() {
+	public void setPv(int pointDeVie) {
 		this.pointDeVie = pointDeVie;
 	}
 	

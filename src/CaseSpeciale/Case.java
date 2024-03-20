@@ -3,6 +3,7 @@ import java.util.Random;
 
 import Enum.Effet;
 import jeu.Affichage;
+import jeu.JournalDeBord;
 import jeu.Pirate;
 import jeu.Plateau;
 
@@ -11,6 +12,9 @@ public class Case {
 	private int numero;
 	public int getNumero() {
 		return numero;
+	}
+	protected void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
+		
 	}
 	
 }
