@@ -63,15 +63,15 @@ public class Jeu {
 	public void duel(Pirate pirate1, Pirate pirate2) {
         int distance = Math.abs(pirate1.getPosition() - pirate2.getPosition());
         if (distance <= 2) {
-            int puissanceArmePirate1 = pirate1.getArme();
-            int puissanceArmePirate2 = pirate2.getArme();
+            Arme puissanceArmePirate1 = pirate1.getArme();
+            Arme puissanceArmePirate2 = pirate2.getArme();
             
-            if (puissanceArmePirate1 > puissanceArmePirate2) {
+            if (puissanceArmePirate1.ordinal() > puissanceArmePirate2.ordinal()) {
                 pirate2.setPv(pirate2.getPV() - 1);
                 System.out.println(pirate1.getNom() + "a une force de" + puissanceArmePirate1);
                 System.out.println(pirate2.getNom() + "a une force de" + puissanceArmePirate2);
-                System.out.println(pirate1.getNom() + "gagne", pirate2.getNom() + "perd 1 PV");
-            } else if (puissanceArmePirate1 < puissanceArmePirate2) {
+                System.out.println(pirate1.getNom() + "gagne" + pirate2.getNom() + "perd 1 PV");
+            } else if (puissanceArmePirate1.ordinal() < puissanceArmePirate2.ordinal()) {
                 pirate1.setPv(pirate1.getPV() - 1);
                 System.out.println(pirate1.getNom() + "a une force de" + puissanceArmePirate1);
                 System.out.println(pirate2.getNom() + "a une force de" + puissanceArmePirate2);

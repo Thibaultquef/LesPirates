@@ -13,7 +13,7 @@ public class Case {
 	public int getNumero() {
 		return numero;
 	}
-	protected void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
+	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
 		
 	}
 	
