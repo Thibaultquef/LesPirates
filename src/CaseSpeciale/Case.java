@@ -10,11 +10,17 @@ import jeu.Plateau;
 public class Case {
 	private Random random = new Random();
 	private int numero;
+	
+    public Case(int numero) {
+        this.numero = numero;
+    }
+    
 	public int getNumero() {
 		return numero;
 	}
-	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
-		
-	}
+	
+    public boolean estCaseSpeciale() {
+        return false;
+    }
 	
 }

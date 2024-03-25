@@ -61,33 +61,34 @@ public class Jeu {
 	}
 	
 	public void duel(Pirate pirate1, Pirate pirate2) {
-        int distance = Math.abs(pirate1.getPosition() - pirate2.getPosition());
-        if (distance <= 2) {
-            Arme puissanceArmePirate1 = pirate1.getArme();
-            Arme puissanceArmePirate2 = pirate2.getArme();
-            
-            if (puissanceArmePirate1.ordinal() > puissanceArmePirate2.ordinal()) {
-                pirate2.setPv(pirate2.getPV() - 1);
-                System.out.println(pirate1.getNom() + "a une force de" + puissanceArmePirate1);
-                System.out.println(pirate2.getNom() + "a une force de" + puissanceArmePirate2);
-                System.out.println(pirate1.getNom() + "gagne" + pirate2.getNom() + "perd 1 PV");
-            } else if (puissanceArmePirate1.ordinal() < puissanceArmePirate2.ordinal()) {
-                pirate1.setPv(pirate1.getPV() - 1);
-                System.out.println(pirate1.getNom() + "a une force de" + puissanceArmePirate1);
-                System.out.println(pirate2.getNom() + "a une force de" + puissanceArmePirate2);
-                System.out.println("Le joueur 2 gagne, le joueur 1 perd 1 PV");
-            } else {
-                System.out.println(pirate1.getNom() + "a une force de" + puissanceArmePirate1);
-                System.out.println(pirate2.getNom() + "a une force de" + puissanceArmePirate2);
-                System.out.println("Aucun joueur ne gagne");
+	    int distance = Math.abs(pirate1.getPosition() - pirate2.getPosition());
+	    if (distance <= 2) {
+	        Arme puissanceArmePirate1 = pirate1.getArme();
+	        Arme puissanceArmePirate2 = pirate2.getArme();
+	        
+	        journal.afficherDebutDuel(pirate1, pirate2);
+	        
+	        if (puissanceArmePirate1.ordinal() > puissanceArmePirate2.ordinal()) {
+	            pirate2.setPv(pirate2.getPV() - 1);
+	            journal.afficherResultatDuel(pirate1, pirate2, 1);
+	        } else if (puissanceArmePirate1.ordinal() < puissanceArmePirate2.ordinal()) {
+	            pirate1.setPv(pirate1.getPV() - 1);
+	            journal.afficherResultatDuel(pirate2, pirate1, 1);
+	        } else {
+	            journal.afficherResultatDuel(pirate1, pirate2, 0);
+	        }
+	        
+	        journal.afficherFinDuel(pirate1, pirate2);
+	    }
+	}
+	
+	public boolean gagnantDuel(Pirate pirate) {
+        for (Pirate p : listePirates) {
+            if (p != pirate && p.getPV() > 0) {
+                return false;
             }
         }
-	}
-	
-	public void gagantDuel() {
-		
-	}
-	
-
-}
-
+        journal.afficherGagnant(pirate);
+        return true;
+    }
+} 
