@@ -8,7 +8,6 @@ import jeu.Pirate;
 import jeu.Plateau;
 
 public class Case {
-	private Random random = new Random();
 	private int numero;
 	
     public Case(int numero) {
@@ -23,7 +22,7 @@ public class Case {
         return false;
     }
 
-	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random2, JournalDeBord journal) {
+	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
 		
 	}
 	

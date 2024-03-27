@@ -1,4 +1,5 @@
 package CaseSpeciale;
+
 import java.util.Random;
 
 import Enum.Effet;
@@ -12,8 +13,8 @@ public class caseRhum extends caseSpeciale {
 		super(numero, Effet.RHUM);
 	}
 
-    @Override
-    public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
-		
+	@Override
+	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
+
 	}
 }

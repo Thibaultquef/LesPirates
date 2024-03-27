@@ -1,5 +1,5 @@
 package Enum;
 
 public enum Effet {
-	RHUM,ARME,NEUTRE,VICTOIRE
+	RHUM, ARME, NEUTRE, VICTOIRE
 }
