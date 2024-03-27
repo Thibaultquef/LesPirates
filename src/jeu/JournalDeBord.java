@@ -1,5 +1,7 @@
 package jeu;
 
+import CaseSpeciale.Case;
+
 public class JournalDeBord {
 
     public void afficherDebutDuel(Pirate pirate1, Pirate pirate2) {
@@ -29,5 +31,25 @@ public class JournalDeBord {
     
     public void afficherGagnant(Pirate gagnant) {
         System.out.println(gagnant.getNom() + " est le dernier pirate en vie ! Il remporte la partie !");
+    }
+    
+    public void aQuiTour(Pirate pirate) {
+        System.out.println("C'est le tour de " + pirate.getNom() + ".");
+    }
+
+    public void lancerDe(Pirate pirate, int valeurDe) {
+        System.out.println(pirate.getNom() + " lance le dé et obtient " + valeurDe + ".");
+    }
+
+    public void deplacement(Pirate pirate, int valeurDe, int nbCase) {
+        System.out.println(pirate.getNom() + " avance de " + valeurDe + " cases.");
+    }
+
+    public void descCase(Pirate pirate, Case caseActuelle) {
+        System.out.println(pirate.getNom() + " tombe sur la case numéro " + caseActuelle.getNumero() + ".");
+    }
+
+    public void gagnantPartie(Pirate pirate) {
+        System.out.println(pirate.getNom() + " est le dernier pirate en vie ! Félicitations !");
     }
 }

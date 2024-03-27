@@ -53,12 +53,22 @@ public class Jeu {
 	}
 	
 	public void tourPirate(Pirate pirate) {
-		int resultatDe = lanceDe();
-		pirate.deplacerPirate(resultatDe);
-		Case caseActuelle = plateau.getCase(pirate.getPosition()-1);
-		caseActuelle.appliquerEffet(pirate, plateau, random, journal);
-		
-	}
+        int valeurDe = lanceDe();
+        
+        journal.aQuiTour(pirate);
+        journal.lancerDe(pirate, valeurDe);
+
+        pirate.deplacerPirate(valeurDe);
+        journal.deplacement(pirate, valeurDe, plateau.getnbCases());
+
+        Case caseActuelle = plateau.getCase(pirate.getPosition());
+        journal.descCase(pirate, caseActuelle);
+
+        caseActuelle.appliquerEffet(pirate, plateau, random, journal);
+        if (gagnantDuel(pirate)) {
+            journal.gagnantPartie(pirate);
+        }
+    }
 	
 	public void duel(Pirate pirate1, Pirate pirate2) {
 	    int distance = Math.abs(pirate1.getPosition() - pirate2.getPosition());

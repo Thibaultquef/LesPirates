@@ -22,5 +22,9 @@ public class Case {
     public boolean estCaseSpeciale() {
         return false;
     }
+
+	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random2, JournalDeBord journal) {
+		
+	}
 	
 }
