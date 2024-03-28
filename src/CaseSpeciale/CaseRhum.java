@@ -15,6 +15,9 @@ public class CaseRhum extends CaseSpeciale {
 
 	@Override
 	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
-		//TODO appliquerEffet2
+        int lanceDe = random.nextInt(6) + 1;
+        int nouvellePosition = Math.max(pirate.getPosition() - lanceDe, 1);
+        pirate.setPosition(nouvellePosition);
+        journal.afficherReculeRhum(lanceDe);
 	}
 }

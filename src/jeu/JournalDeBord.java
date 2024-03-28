@@ -1,6 +1,7 @@
 package jeu;
 
 import CaseSpeciale.Case;
+import CaseSpeciale.CaseRhum;
 import Enum.Arme;
 
 public class JournalDeBord {
@@ -71,4 +72,7 @@ public class JournalDeBord {
 	public void affichePirateIgnoreArme(Pirate pirate) {
 		System.out.println(pirate.getNom() + " ignore l'arme trouvée car il en a déjà une meilleure.");
 	}
+    public void afficherReculeRhum(int lanceDe) {
+        System.out.println("Vous avez trop bu, vous reculez de " + lanceDe + " cases.");
+    }
 }
