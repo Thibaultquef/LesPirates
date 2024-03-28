@@ -1,11 +1,4 @@
 package CaseSpeciale;
-import java.util.Random;
-
-import Enum.Effet;
-import jeu.Affichage;
-import jeu.JournalDeBord;
-import jeu.Pirate;
-import jeu.Plateau;
 
 public class Case {
 	private int numero;
@@ -22,9 +15,6 @@ public class Case {
         return false;
     }
 
-	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
-		//TODO
-	}
     public boolean estCaseVictoire() {
         return false; 
     }

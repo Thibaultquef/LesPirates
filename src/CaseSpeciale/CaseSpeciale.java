@@ -24,6 +24,5 @@ public abstract class CaseSpeciale extends Case {
 		return true;
 	}
 
-	@Override
 	public abstract void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal);
 }

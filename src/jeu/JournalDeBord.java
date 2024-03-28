@@ -75,4 +75,20 @@ public class JournalDeBord {
     public void afficherReculeRhum(int lanceDe) {
         System.out.println("Vous avez trop bu, vous reculez de " + lanceDe + " cases.");
     }
+    
+    public void afficherDebutTour(Pirate pirate) {
+        System.out.println("C'est le tour de " + pirate.getNom());
+    }
+    
+    public void afficherLanceDe(int valeurDe) {
+        System.out.println("Le dé a été lancé : " + valeurDe);
+    }
+    
+    public void afficherDeplacement(Pirate pirate, int valeurDe) {
+        System.out.println(pirate.getNom() + " se déplace de " + valeurDe + " cases.");
+    }
+    
+    public void afficherFinDePartie(int tourActuel) {
+        System.out.println("Fin de la partie après " + tourActuel + " tours.");
+    }
 }

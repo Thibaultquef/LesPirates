@@ -19,7 +19,7 @@ public class Plateau {
         genererPlateau();
     }
 
-    private void genererPlateau() {
+    public void genererPlateau() {
         this.caze = new Case[nbCases];
         Effet[] effets = Effet.values();
         this.caze[nbCases - 1] = new CaseVictoire(nbCases);

@@ -1,14 +1,16 @@
 package jeu;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import CaseSpeciale.Case;
+import CaseSpeciale.CaseSpeciale;
 import Enum.Arme;
 import Enum.Couleur;
 import Enum.Identite;
 
 public class Jeu {
-	private int nbJoueurs = 2;
 	private Random random = new Random();
 	private Plateau plateau;
 	private Pirate[] listePirates;
@@ -23,16 +25,49 @@ public class Jeu {
 	}
 
 	public void initialiserPlateau() {
-		this.plateau = new Plateau();
+	    plateau = new Plateau();
+	    plateau.genererPlateau();
 	}
 
 	public Plateau getPlateau() {
 		return plateau;
 	}
 
-	public void start() {
-		// TODO a faire
-	}
+    public void start() {
+        boolean jeuTermine = false;
+        int tour = 0;
+
+        while (!jeuTermine) {
+            for (Pirate pirate : listePirates) {
+                if (pirate.getPV() > 0) {
+                    tourPirate(pirate);
+                    Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
+                    if (caseActuelle.estCaseVictoire()) {
+                        journal.afficherGagnant(pirate);
+                        jeuTermine = true;
+                        break;
+                    }
+                }
+            }
+
+            List<Pirate> piratesEnVie = new ArrayList<>();
+            for (Pirate pirate : listePirates) {
+                if (pirate.getPV() > 0) {
+                    piratesEnVie.add(pirate);
+                }
+            }
+            if (piratesEnVie.size() <= 1) {
+                jeuTermine = true;
+                if (!piratesEnVie.isEmpty()) {
+                    journal.afficherGagnant(piratesEnVie.get(0));
+                }
+            }
+
+            tour++;
+        }
+
+        journal.afficherFinDePartie(tour);
+    }
 
 	public void remplissageListePirate() {
 		for (int i = 0; i < listePirates.length; i++) {
@@ -57,7 +92,7 @@ public class Jeu {
 	}
 
 	public int lanceDe() {
-		return (random.nextInt(7));
+		return (random.nextInt(6) + 1);
 	}
 
 	public void tourPirate(Pirate pirate) {
@@ -68,15 +103,15 @@ public class Jeu {
 
 		pirate.deplacerPirate(valeurDe);
 		journal.deplacement(pirate, valeurDe, plateau.getnbCases());
-
-		Case caseActuelle = plateau.getCase(pirate.getPosition());
-		caseActuelle.appliquerEffet(pirate, plateau, random, journal);
-		journal.descCase(pirate, caseActuelle);
-
-		caseActuelle.appliquerEffet(pirate, plateau, random, journal);
-		if (gagnantDuel(pirate)) {
-			journal.gagnantPartie(pirate);
+	    int positionMax = plateau.getnbCases();
+	    if (pirate.getPosition() > positionMax) {
+	        pirate.setPosition(positionMax);
+	    }
+		Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
+		if (caseActuelle instanceof CaseSpeciale) {
+			((CaseSpeciale) caseActuelle).appliquerEffet(pirate, plateau, random, journal);
 		}
+
 	}
 
 	public void duel(Pirate pirate1, Pirate pirate2) {
