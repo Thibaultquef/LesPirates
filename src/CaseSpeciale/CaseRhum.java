@@ -7,14 +7,14 @@ import jeu.JournalDeBord;
 import jeu.Pirate;
 import jeu.Plateau;
 
-public class caseRhum extends caseSpeciale {
+public class CaseRhum extends CaseSpeciale {
 
-	public caseRhum(int numero) {
+	public CaseRhum(int numero) {
 		super(numero, Effet.RHUM);
 	}
 
 	@Override
 	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
-
+		//TODO appliquerEffet2
 	}
 }

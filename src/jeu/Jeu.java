@@ -14,8 +14,16 @@ public class Jeu {
 	private Pirate[] listePirates;
 	private JournalDeBord journal;
 
-	public Pirate[] getListePirates() {
-		return listePirates;
+	public Jeu() {
+		this.journal = new JournalDeBord();
+		this.plateau = new Plateau();
+		this.listePirates = new Pirate[0];
+		this.listePirates = new Pirate[2];
+		remplissageListePirate();
+	}
+
+	public void initialiserPlateau() {
+		this.plateau = new Plateau();
 	}
 
 	public Plateau getPlateau() {
@@ -23,30 +31,29 @@ public class Jeu {
 	}
 
 	public void start() {
-
+		// TODO a faire
 	}
 
-	public Pirate[] remplissageListePirate() {
-
-		Pirate[] listePirates = new Pirate[nbJoueurs];
-		Couleur[] couleurs = Couleur.values();
-		Identite[] identites = Identite.values();
-
-		for (int i = 0; i < nbJoueurs; i++) {
+	public void remplissageListePirate() {
+		for (int i = 0; i < listePirates.length; i++) {
 			Pirate pirate = new Pirate();
 
-			int idxCouleur = random.nextInt(couleurs.length);
-			int idxIdentite = random.nextInt(identites.length);
+			Identite identite = Identite.values()[random.nextInt(Identite.values().length)];
+			Couleur couleur = Couleur.values()[random.nextInt(Couleur.values().length)];
+			Arme arme = Arme.values()[random.nextInt(Arme.values().length)];
 
-			pirate.setNom(identites[idxIdentite].toString());
-			pirate.setCouleur(couleurs[idxCouleur]);
-			pirate.setArme(Arme.POINGS);
+			pirate.setNom(identite);
+			pirate.setCouleur(couleur);
+			pirate.setArme(arme);
+			pirate.setPosition(1);
+			pirate.setPv(5);
 
 			listePirates[i] = pirate;
 		}
+	}
 
+	public Pirate[] getListePirates() {
 		return listePirates;
-
 	}
 
 	public int lanceDe() {
@@ -63,6 +70,7 @@ public class Jeu {
 		journal.deplacement(pirate, valeurDe, plateau.getnbCases());
 
 		Case caseActuelle = plateau.getCase(pirate.getPosition());
+		caseActuelle.appliquerEffet(pirate, plateau, random, journal);
 		journal.descCase(pirate, caseActuelle);
 
 		caseActuelle.appliquerEffet(pirate, plateau, random, journal);

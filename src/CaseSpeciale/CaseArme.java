@@ -7,11 +7,11 @@ import jeu.JournalDeBord;
 import jeu.Pirate;
 import jeu.Plateau;
 
-public class caseArme extends caseSpeciale {
+public class CaseArme extends CaseSpeciale {
 
 	private Arme armeCase;
 
-	public caseArme(int numero, Arme arme) {
+	public CaseArme(int numero, Arme arme) {
 		super(numero, Effet.ARME);
 		this.armeCase = arme;
 	}

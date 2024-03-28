@@ -6,11 +6,11 @@ import jeu.JournalDeBord;
 import jeu.Pirate;
 import jeu.Plateau;
 
-public abstract class caseSpeciale extends Case {
+public abstract class CaseSpeciale extends Case {
 
 	private Effet effet;
 
-	public caseSpeciale(int numero, Effet effet) {
+	protected CaseSpeciale(int numero, Effet effet) {
 		super(numero);
 		this.effet = effet;
 	}
@@ -24,5 +24,6 @@ public abstract class caseSpeciale extends Case {
 		return true;
 	}
 
+	@Override
 	public abstract void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal);
 }

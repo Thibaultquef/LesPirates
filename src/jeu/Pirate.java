@@ -2,23 +2,24 @@ package jeu;
 
 import Enum.Arme;
 import Enum.Couleur;
+import Enum.Identite;
 
 public class Pirate {
 	private int pointDeVie = 5;
-	private String nom;
+	private Identite nom;
 	private Couleur couleur;
-	private int position;
+	private int position = 1;
 	private Arme arme;
 	
 	public int getPV() {
 		return pointDeVie;
 	}
 	
-	public String getNom() {
+	public Identite getNom() {
 		return nom;
 	}
 	
-	public void setNom(String nom) {
+	public void setNom(Identite nom) {
 		this.nom = nom;
 	}
 	
@@ -60,5 +61,9 @@ public class Pirate {
 	
 	public int infligerDegat(int difference) {
 		return difference;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 }

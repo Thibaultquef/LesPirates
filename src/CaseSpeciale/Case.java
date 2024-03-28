@@ -23,7 +23,9 @@ public class Case {
     }
 
 	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
-		
+		//TODO
 	}
-	
+    public boolean estCaseVictoire() {
+        return false; 
+    }
 }

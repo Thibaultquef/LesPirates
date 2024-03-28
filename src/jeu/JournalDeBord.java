@@ -7,16 +7,18 @@ public class JournalDeBord {
 
 	public void afficherDebutDuel(Pirate pirate1, Pirate pirate2) {
 		System.out.println("Le duel commence entre " + pirate1.getNom() + " et " + pirate2.getNom() + "!");
-		System.out.println(pirate1.getNom() + " avec " + pirate1.getArme() + " VS " + pirate2.getNom() + " avec "
+		System.out.println(pirate1.getNom() + " qui combat avec " + pirate1.getArme() + " VS " + pirate2.getNom() + " qui combat avec "
 				+ pirate2.getArme());
 	}
 
 	public void afficherResultatDuel(Pirate attaquant, Pirate defenseur, int pvPerdus) {
 		if (pvPerdus > 0) {
-			System.out.println(attaquant.getNom() + " attaque avec " + attaquant.getArme() + " et inflige " + pvPerdus
-					+ " dégâts à " + defenseur.getNom());
+			
+			System.out.println("L\'arme de " + attaquant.getNom() +" est plus puissante !");
+			System.out.println(attaquant.getNom() + " attaque avec " + attaquant.getArme() +". " + defenseur.getNom() +" Perd " + pvPerdus
+					+ " PV");
 			System.out.println(
-					defenseur.getNom() + " perd " + pvPerdus + " PV et il lui reste " + defenseur.getPV() + " PV");
+					"Il reste " + defenseur.getPV() + " à " + defenseur.getNom());
 		} else {
 			System.out.println("Les deux pirates " + attaquant.getNom() + " et " + defenseur.getNom()
 					+ " sont à égalité, aucun PV perdu !");
