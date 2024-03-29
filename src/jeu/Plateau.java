@@ -22,8 +22,9 @@ public class Plateau {
     public void genererPlateau() {
         this.caze = new Case[nbCases];
         Effet[] effets = Effet.values();
+        this.caze[0] = new Case(1);
         this.caze[nbCases - 1] = new CaseVictoire(nbCases);
-        for (int i = 0; i < nbCases - 1; i++) { 
+        for (int i = 1; i < nbCases - 1; i++) { 
             Effet effetChoisi = effets[random.nextInt(effets.length)];
             switch (effetChoisi) {
                 case ARME:

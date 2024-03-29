@@ -59,7 +59,7 @@ public class Jeu {
             if (piratesEnVie.size() <= 1) {
                 jeuTermine = true;
                 if (!piratesEnVie.isEmpty()) {
-                    journal.afficherGagnant(piratesEnVie.get(0));
+                    journal.afficherGagnantDuel(piratesEnVie.get(0));
                 }
             }
 
@@ -108,6 +108,7 @@ public class Jeu {
 	        pirate.setPosition(positionMax);
 	    }
 		Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
+	    journal.afficherInfoCase(pirate, caseActuelle);
 		if (caseActuelle instanceof CaseSpeciale) {
 			((CaseSpeciale) caseActuelle).appliquerEffet(pirate, plateau, random, journal);
 		}
@@ -142,7 +143,7 @@ public class Jeu {
 				return false;
 			}
 		}
-		journal.afficherGagnant(pirate);
+		journal.afficherGagnantDuel(pirate);
 		return true;
 	}
 }

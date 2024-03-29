@@ -1,7 +1,7 @@
 package jeu;
 
 import CaseSpeciale.Case;
-import CaseSpeciale.CaseRhum;
+import CaseSpeciale.CaseSpeciale;
 import Enum.Arme;
 
 public class JournalDeBord {
@@ -37,8 +37,12 @@ public class JournalDeBord {
 		}
 	}
 
-	public void afficherGagnant(Pirate gagnant) {
+	public void afficherGagnantDuel(Pirate gagnant) {
 		System.out.println(gagnant.getNom() + " est le dernier pirate en vie ! Il remporte la partie !");
+	}
+	
+	public void afficherGagnant(Pirate gagnant) {
+		System.out.println(gagnant.getNom() + " est sur la dernière case ! Il remporte la partie !");
 	}
 
 	public void aQuiTour(Pirate pirate) {
@@ -91,4 +95,16 @@ public class JournalDeBord {
     public void afficherFinDePartie(int tourActuel) {
         System.out.println("Fin de la partie après " + tourActuel + " tours.");
     }
+    
+    public void afficherInfoCase(Pirate pirate, Case caseActuelle) {
+        if (caseActuelle instanceof CaseSpeciale) {
+            CaseSpeciale caseSpeciale = (CaseSpeciale) caseActuelle;
+            System.out.println(pirate.getNom() + " se trouve sur une case spéciale : " + caseSpeciale.getEffet());
+        } else if (caseActuelle.estCaseVictoire()) {
+            System.out.println(pirate.getNom() + " est sur la case de la victoire!");
+        } else {
+            System.out.println(pirate.getNom() + " est sur une case normale.");
+        }
+    }
+
 }
