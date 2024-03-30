@@ -9,7 +9,7 @@ public class Pirate {
 	private Identite nom;
 	private Couleur couleur;
 	private int position = 1;
-	private Arme arme;
+	private Arme arme = Arme.POINGS;
 	
 	public int getPV() {
 		return pointDeVie;

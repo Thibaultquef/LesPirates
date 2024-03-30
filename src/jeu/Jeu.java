@@ -75,11 +75,9 @@ public class Jeu {
 
 			Identite identite = Identite.values()[random.nextInt(Identite.values().length)];
 			Couleur couleur = Couleur.values()[random.nextInt(Couleur.values().length)];
-			Arme arme = Arme.values()[random.nextInt(Arme.values().length)];
-
+			
 			pirate.setNom(identite);
 			pirate.setCouleur(couleur);
-			pirate.setArme(arme);
 			pirate.setPosition(1);
 			pirate.setPv(5);
 
@@ -96,23 +94,26 @@ public class Jeu {
 	}
 
 	public void tourPirate(Pirate pirate) {
-		int valeurDe = lanceDe();
+	    int valeurDe = lanceDe();
 
-		journal.aQuiTour(pirate);
-		journal.lancerDe(pirate, valeurDe);
+	    journal.aQuiTour(pirate);
+	    journal.lancerDe(pirate, valeurDe);
 
-		pirate.deplacerPirate(valeurDe);
-		journal.deplacement(pirate, valeurDe, plateau.getnbCases());
-	    int positionMax = plateau.getnbCases();
-	    if (pirate.getPosition() > positionMax) {
-	        pirate.setPosition(positionMax);
+	    int nouvellePosition = pirate.getPosition() + valeurDe;
+	    if (nouvellePosition > plateau.getnbCases()) {
+	        int surplus = nouvellePosition - plateau.getnbCases();
+	        nouvellePosition = plateau.getnbCases() - surplus;
 	    }
-		Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
-	    journal.afficherInfoCase(pirate, caseActuelle);
-		if (caseActuelle instanceof CaseSpeciale) {
-			((CaseSpeciale) caseActuelle).appliquerEffet(pirate, plateau, random, journal);
-		}
+	    pirate.setPosition(nouvellePosition);
 
+	    journal.deplacement(pirate, valeurDe, plateau.getnbCases());
+	    
+	    Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
+	    journal.afficherInfoCase(pirate, caseActuelle);
+	    if (caseActuelle instanceof CaseSpeciale) {
+	        ((CaseSpeciale) caseActuelle).appliquerEffet(pirate, plateau, random, journal);
+	    }
+		verifierDuel(pirate);
 	}
 
 	public void duel(Pirate pirate1, Pirate pirate2) {
@@ -145,5 +146,16 @@ public class Jeu {
 		}
 		journal.afficherGagnantDuel(pirate);
 		return true;
+	}
+	public void verifierDuel(Pirate pirateActif) {
+	    for (Pirate adversaire : listePirates) {
+	        if (!adversaire.equals(pirateActif) && adversaire.getPV() > 0) {
+	            int distance = Math.abs(pirateActif.getPosition() - adversaire.getPosition());
+	            if (distance <= 2) {
+	                duel(pirateActif, adversaire);
+	                break; 
+	            }
+	        }
+	    }
 	}
 }

@@ -20,7 +20,7 @@ public class CaseArme extends CaseSpeciale {
 	public void appliquerEffet(Pirate pirate, Plateau plateau, Random random, JournalDeBord journal) {
 		if (armeCase.getForce() > pirate.getArme().getForce()) {
 			pirate.setArme(armeCase);
-			journal.affichePiratePrendArme(pirate);
+			journal.affichePiratePrendArme(pirate, armeCase);
 		} else {
 			journal.affichePirateIgnoreArme(pirate);
 		}

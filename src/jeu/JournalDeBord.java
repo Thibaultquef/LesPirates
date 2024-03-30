@@ -69,8 +69,8 @@ public class JournalDeBord {
 		System.out.println(pirate.getNom() + " trouve une arme: " + arme + " de force " + force);
 	}
 
-	public void affichePiratePrendArme(Pirate pirate) {
-		System.out.println(pirate.getNom() + " prend la nouvelle arme!");
+	public void affichePiratePrendArme(Pirate pirate, Arme arme) {
+		 System.out.println(pirate.getNom() + " trouve et prend une nouvelle arme: " + arme.name() + " de force " + arme.getForce());
 	}
 
 	public void affichePirateIgnoreArme(Pirate pirate) {
