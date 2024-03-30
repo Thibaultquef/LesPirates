@@ -107,4 +107,12 @@ public class JournalDeBord {
         }
     }
 
+    public void afficherEffetFruit(Pirate pirate) {
+        System.out.println(pirate.getNom() + " mange un fruit du démon ! Son prochain lancer de dé sera doublé.");
+    }
+
+    public void afficherDoubleDe(Pirate pirate, int valeurDe) {
+        System.out.println(pirate.getNom() + " bénéficie de l'effet du fruit du démon et lance un dé de valeur " + valeurDe + ".");
+    }
+
 }

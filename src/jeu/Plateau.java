@@ -2,6 +2,7 @@ package jeu;
 
 import CaseSpeciale.Case;
 import CaseSpeciale.CaseArme;
+import CaseSpeciale.CaseFruit;
 import CaseSpeciale.CaseRhum;
 import CaseSpeciale.CaseVictoire;
 import Enum.Arme;
@@ -9,44 +10,47 @@ import Enum.Effet;
 import java.util.Random;
 
 public class Plateau {
-    private final int nbCases = 30;
-    private Case[] caze;
-    private Random random = new Random();
-    Arme[] armes;
+	private final int nbCases = 30;
+	private Case[] caze;
+	private Random random = new Random();
+	Arme[] armes;
 
-    public Plateau() { 
-    	initialiserArmes();
-        genererPlateau();
-    }
-
-    public void genererPlateau() {
-        this.caze = new Case[nbCases];
-        Effet[] effets = Effet.values();
-        this.caze[0] = new Case(1);
-        this.caze[nbCases - 1] = new CaseVictoire(nbCases);
-        for (int i = 1; i < nbCases - 1; i++) { 
-            Effet effetChoisi = effets[random.nextInt(effets.length)];
-            switch (effetChoisi) {
-                case ARME:
-				
-				this.caze[i] = new CaseArme(i + 1, armes[random.nextInt(armes.length)]);
-                    break;
-                case RHUM:
-                    this.caze[i] = new CaseRhum(i + 1);
-                    break;
-                default:
-                    this.caze[i] = new Case(i + 1); 
-                    break;
-                
-            }
-
-        }
-        this.caze[nbCases-1] = new CaseVictoire(nbCases+1) ;
+	public Plateau() {
+		initialiserArmes();
+		genererPlateau();
 	}
 
-    private void initialiserArmes() {
-        armes = Arme.values();
-    }
+	public void genererPlateau() {
+		this.caze = new Case[nbCases];
+		Effet[] effets = Effet.values();
+		this.caze[0] = new Case(1);
+		this.caze[nbCases - 1] = new CaseVictoire(nbCases);
+		for (int i = 1; i < nbCases - 1; i++) {
+			Effet effetChoisi = effets[random.nextInt(effets.length)];
+			switch (effetChoisi) {
+			case ARME:
+				this.caze[i] = new CaseArme(i + 1, armes[random.nextInt(armes.length)]);
+				break;
+			case RHUM:
+				this.caze[i] = new CaseRhum(i + 1);
+				break;
+			case FRUIT:
+				this.caze[i] = new CaseFruit(i + 1);
+				break;
+			default:
+				this.caze[i] = new Case(i + 1);
+				break;
+
+			}
+
+		}
+		this.caze[nbCases - 1] = new CaseVictoire(nbCases + 1);
+	}
+
+	private void initialiserArmes() {
+		armes = Arme.values();
+	}
+
 	public int getnbCases() {
 		return nbCases;
 	}

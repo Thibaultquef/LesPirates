@@ -25,49 +25,49 @@ public class Jeu {
 	}
 
 	public void initialiserPlateau() {
-	    plateau = new Plateau();
-	    plateau.genererPlateau();
+		plateau = new Plateau();
+		plateau.genererPlateau();
 	}
 
 	public Plateau getPlateau() {
 		return plateau;
 	}
 
-    public void start() {
-        boolean jeuTermine = false;
-        int tour = 0;
+	public void start() {
+		boolean jeuTermine = false;
+		int tour = 0;
 
-        while (!jeuTermine) {
-            for (Pirate pirate : listePirates) {
-                if (pirate.getPV() > 0) {
-                    tourPirate(pirate);
-                    Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
-                    if (caseActuelle.estCaseVictoire()) {
-                        journal.afficherGagnant(pirate);
-                        jeuTermine = true;
-                        break;
-                    }
-                }
-            }
+		while (!jeuTermine) {
+			for (Pirate pirate : listePirates) {
+				if (pirate.getPV() > 0) {
+					tourPirate(pirate);
+					Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
+					if (caseActuelle.estCaseVictoire()) {
+						journal.afficherGagnant(pirate);
+						jeuTermine = true;
+						break;
+					}
+				}
+			}
 
-            List<Pirate> piratesEnVie = new ArrayList<>();
-            for (Pirate pirate : listePirates) {
-                if (pirate.getPV() > 0) {
-                    piratesEnVie.add(pirate);
-                }
-            }
-            if (piratesEnVie.size() <= 1) {
-                jeuTermine = true;
-                if (!piratesEnVie.isEmpty()) {
-                    journal.afficherGagnantDuel(piratesEnVie.get(0));
-                }
-            }
+			List<Pirate> piratesEnVie = new ArrayList<>();
+			for (Pirate pirate : listePirates) {
+				if (pirate.getPV() > 0) {
+					piratesEnVie.add(pirate);
+				}
+			}
+			if (piratesEnVie.size() <= 1) {
+				jeuTermine = true;
+				if (!piratesEnVie.isEmpty()) {
+					journal.afficherGagnantDuel(piratesEnVie.get(0));
+				}
+			}
 
-            tour++;
-        }
+			tour++;
+		}
 
-        journal.afficherFinDePartie(tour);
-    }
+		journal.afficherFinDePartie(tour);
+	}
 
 	public void remplissageListePirate() {
 		for (int i = 0; i < listePirates.length; i++) {
@@ -75,7 +75,7 @@ public class Jeu {
 
 			Identite identite = Identite.values()[random.nextInt(Identite.values().length)];
 			Couleur couleur = Couleur.values()[random.nextInt(Couleur.values().length)];
-			
+
 			pirate.setNom(identite);
 			pirate.setCouleur(couleur);
 			pirate.setPosition(1);
@@ -89,30 +89,37 @@ public class Jeu {
 		return listePirates;
 	}
 
-	public int lanceDe() {
-		return (random.nextInt(6) + 1);
+	public int lanceDe(Pirate pirate) {
+	    int valeurDe = random.nextInt(6) + 1; 
+	    if (pirate.isDoubleDe()) {
+	        valeurDe *= 2; 
+	        pirate.setDoubleDe(false); 
+	        journal.afficherDoubleDe(pirate, valeurDe);
+	    }
+	    return valeurDe;
 	}
 
+
 	public void tourPirate(Pirate pirate) {
-	    int valeurDe = lanceDe();
+		int valeurDe = lanceDe(pirate);
 
-	    journal.aQuiTour(pirate);
-	    journal.lancerDe(pirate, valeurDe);
+		journal.aQuiTour(pirate);
+		journal.lancerDe(pirate, valeurDe);
 
-	    int nouvellePosition = pirate.getPosition() + valeurDe;
-	    if (nouvellePosition > plateau.getnbCases()) {
-	        int surplus = nouvellePosition - plateau.getnbCases();
-	        nouvellePosition = plateau.getnbCases() - surplus;
-	    }
-	    pirate.setPosition(nouvellePosition);
+		int nouvellePosition = pirate.getPosition() + valeurDe;
+		if (nouvellePosition > plateau.getnbCases()) {
+			int surplus = nouvellePosition - plateau.getnbCases();
+			nouvellePosition = plateau.getnbCases() - surplus;
+		}
+		pirate.setPosition(nouvellePosition);
 
-	    journal.deplacement(pirate, valeurDe, plateau.getnbCases());
-	    
-	    Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
-	    journal.afficherInfoCase(pirate, caseActuelle);
-	    if (caseActuelle instanceof CaseSpeciale) {
-	        ((CaseSpeciale) caseActuelle).appliquerEffet(pirate, plateau, random, journal);
-	    }
+		journal.deplacement(pirate, valeurDe, plateau.getnbCases());
+
+		Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
+		journal.afficherInfoCase(pirate, caseActuelle);
+		if (caseActuelle instanceof CaseSpeciale) {
+			((CaseSpeciale) caseActuelle).appliquerEffet(pirate, plateau, random, journal);
+		}
 		verifierDuel(pirate);
 	}
 
@@ -147,15 +154,16 @@ public class Jeu {
 		journal.afficherGagnantDuel(pirate);
 		return true;
 	}
+
 	public void verifierDuel(Pirate pirateActif) {
-	    for (Pirate adversaire : listePirates) {
-	        if (!adversaire.equals(pirateActif) && adversaire.getPV() > 0) {
-	            int distance = Math.abs(pirateActif.getPosition() - adversaire.getPosition());
-	            if (distance <= 2) {
-	                duel(pirateActif, adversaire);
-	                break; 
-	            }
-	        }
-	    }
+		for (Pirate adversaire : listePirates) {
+			if (!adversaire.equals(pirateActif) && adversaire.getPV() > 0) {
+				int distance = Math.abs(pirateActif.getPosition() - adversaire.getPosition());
+				if (distance <= 2) {
+					duel(pirateActif, adversaire);
+					break;
+				}
+			}
+		}
 	}
 }

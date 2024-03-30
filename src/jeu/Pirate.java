@@ -10,6 +10,8 @@ public class Pirate {
 	private Couleur couleur;
 	private int position = 1;
 	private Arme arme = Arme.POINGS;
+    private boolean doubleDe = false;
+
 	
 	public int getPV() {
 		return pointDeVie;
@@ -66,4 +68,12 @@ public class Pirate {
 	public void setPosition(int position) {
 		this.position = position;
 	}
+	
+    public boolean isDoubleDe() {
+        return doubleDe;
+    }
+
+    public void setDoubleDe(boolean doubleDe) {
+        this.doubleDe = doubleDe;
+    }
 }
