@@ -34,40 +34,48 @@ public class Jeu {
 	}
 
 	public void start() {
-		boolean jeuTermine = false;
-		int tour = 0;
+	    boolean jeuTermine = false;
+	    boolean continueJeu;
+	    int tour = 0;
 
-		do {
-			for (Pirate pirate : listePirates) {
-				if (pirate.getPV() > 0) {
-					tourPirate(pirate);
-					Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
-					if (caseActuelle.estCaseVictoire()) {
-						journal.afficherGagnant(pirate);
-						jeuTermine = true;
-						break;
-					}
-				}
-			}
+	    do {
+	        continueJeu = true; 
+	        for (Pirate pirate : listePirates) {
+	            if (!continueJeu) { 
+	                break;
+	            }
+	            if (pirate.getPV() > 0) {
+	                tourPirate(pirate);
+	                Case caseActuelle = plateau.getCase(pirate.getPosition() - 1);
+	                if (caseActuelle.estCaseVictoire()) {
+	                    journal.afficherGagnant(pirate);
+	                    jeuTermine = true;
+	                    continueJeu = false; 
+	                }
+	            }
+	        }
 
-			List<Pirate> piratesEnVie = new ArrayList<>();
-			for (Pirate pirate : listePirates) {
-				if (pirate.getPV() > 0) {
-					piratesEnVie.add(pirate);
-				}
-			}
-			if (piratesEnVie.size() <= 1) {
-				jeuTermine = true;
-				if (!piratesEnVie.isEmpty()) {
-					journal.afficherGagnantDuel(piratesEnVie.get(0));
-				}
-			}
+	        if (!jeuTermine) { 
+	            List<Pirate> piratesEnVie = new ArrayList<>();
+	            for (Pirate pirate : listePirates) {
+	                if (pirate.getPV() > 0) {
+	                    piratesEnVie.add(pirate);
+	                }
+	            }
+	            if (piratesEnVie.size() <= 1) {
+	                jeuTermine = true;
+	                if (!piratesEnVie.isEmpty()) {
+	                    journal.afficherGagnantDuel(piratesEnVie.get(0));
+	                }
+	            }
+	        }
 
-			tour++;
-		} while (!jeuTermine);
+	        tour++;
+	    } while (!jeuTermine);
 
-		journal.afficherFinDePartie(tour);
+	    journal.afficherFinDePartie(tour);
 	}
+
 
 	public void remplissageListePirate() {
 		for (int i = 0; i < listePirates.length; i++) {
