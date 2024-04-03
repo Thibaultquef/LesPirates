@@ -19,7 +19,7 @@ public class Jeu {
 	public Jeu() {
 		this.journal = new JournalDeBord();
 		this.plateau = new Plateau();
-		this.listePirates = new Pirate[0];
+		this.listePirates = new Pirate[1];
 		this.listePirates = new Pirate[2];
 		remplissageListePirate();
 	}
@@ -37,7 +37,7 @@ public class Jeu {
 		boolean jeuTermine = false;
 		int tour = 0;
 
-		while (!jeuTermine) {
+		do {
 			for (Pirate pirate : listePirates) {
 				if (pirate.getPV() > 0) {
 					tourPirate(pirate);
@@ -64,7 +64,7 @@ public class Jeu {
 			}
 
 			tour++;
-		}
+		} while (!jeuTermine);
 
 		journal.afficherFinDePartie(tour);
 	}
